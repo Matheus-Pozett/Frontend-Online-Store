@@ -58,9 +58,9 @@ Ao iniciar este projeto, você concorda com as diretrizes do Código de Conduta 
 
   1. Clone o repositório
 
-  - Use o comando: `git clone git@github.com:tryber/sd-0x-project-frontend-online-store.git`.
+  - Use o comando: `git clone git@github.com:tryber/sd-039-project-frontend-online-store.git`.
   - Entre na pasta do repositório que você acabou de clonar:
-    - `cd sd-0x-project-frontend-online-store`
+    - `cd sd-039-project-frontend-online-store`
   - Vá para a branch do seu grupo:
     - `git checkout main-group-XX && git pull`, em que `XX` é o número do seu grupo. Exemplos: `main-group-1`, `main-group-22`.
 
