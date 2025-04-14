@@ -6,14 +6,12 @@ function Header() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-
     setInputFormHeader(value);
   };
 
   return (
     <header>
       <form>
-        <label htmlFor="buscar">Buscar</label>
         <input
           type="text"
           id="buscar"
