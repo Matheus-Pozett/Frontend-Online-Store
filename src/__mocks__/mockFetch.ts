@@ -4,31 +4,30 @@ import details from './details';
 import searchQuery from './searchQuery';
 
 const mockFetch = (url: string) => {
-  if (url === 'https://api.mercadolibre.com/sites/MLB/categories') {
+  if (url === 'https://api.mercadolibre.com/sites/MLB/categories' || url === '/api/sites/MLB/categories') {
     return Promise.resolve({
       json: () => Promise.resolve(categories),
     });
   }
 
-  if (url.includes('https://api.mercadolibre.com/sites/MLB/search?category=') && url.includes('&q=')) {
+  if (url.includes('/api/sites/MLB/search?category=') || url.includes('https://api.mercadolibre.com/sites/MLB/search?category=')) {
+    if (url.includes('&q=')) {
+      return Promise.resolve({
+        json: () => Promise.resolve(query),
+      });
+    }
     return Promise.resolve({
       json: () => Promise.resolve(query),
     });
   }
 
-  if (url.includes('https://api.mercadolibre.com/sites/MLB/search?q=')) {
+  if (url.includes('/api/sites/MLB/search?q=') || url.includes('https://api.mercadolibre.com/sites/MLB/search?q=')) {
     return Promise.resolve({
       json: () => Promise.resolve(searchQuery),
     });
   }
 
-  if (url.includes('https://api.mercadolibre.com/sites/MLB/search?category=')) {
-    return Promise.resolve({
-      json: () => Promise.resolve(query),
-    });
-  }
-
-  if (url.includes('https://api.mercadolibre.com/items/')) {
+  if (url.includes('/api/items/') || url.includes('https://api.mercadolibre.com/items/')) {
     return Promise.resolve({
       json: () => Promise.resolve(details),
     });

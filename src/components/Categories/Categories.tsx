@@ -4,6 +4,7 @@ import { CategoriesType } from '../../types';
 
 function Categories() {
   const [categoryList, setCategoryList] = useState<CategoriesType[]>([]);
+  console.log(categoryList);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -16,6 +17,7 @@ function Categories() {
     };
     fetchCategories();
   }, []);
+
   return (
     <section>
       {categoryList.map((element) => (
