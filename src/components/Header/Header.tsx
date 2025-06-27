@@ -1,24 +1,41 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getProductsFromCategoryAndQuery } from '../../services/api';
 
 function Header() {
   const [inputFormHeader, setInputFormHeader] = useState('');
+  const [products, setProducts] = useState([]);
+  console.log(products);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setInputFormHeader(value);
   };
 
+  const handleSubmitFormHeader = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const searchProducts = async () => {
+      try {
+        const fetchProducts = await getProductsFromCategoryAndQuery('', inputFormHeader);
+        setProducts(fetchProducts);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    searchProducts();
+  };
+
   return (
     <header>
-      <form>
+      <form onSubmit={ handleSubmitFormHeader }>
         <input
           type="text"
           id="buscar"
           value={ inputFormHeader }
           onChange={ handleChange }
         />
-        <button>Procurar produtos</button>
+        <button type="submit">Procurar produtos</button>
       </form>
 
       <img src="/logo.png" alt="logo do site" />

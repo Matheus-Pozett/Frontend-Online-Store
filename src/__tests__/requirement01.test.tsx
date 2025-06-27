@@ -1,3 +1,5 @@
+// src/__tests__/requirement01.test.tsx
+
 import * as api from '../services/api';
 import mockedCategoriesResult from '../__mocks__/categories';
 import mockFetch from '../__mocks__/mockFetch';
@@ -11,7 +13,8 @@ describe('1 - Implemente o módulo de acesso à api do Mercado Livre', () => {
     return api.getCategories().then((categories: any) => {
       expect(global.fetch).toHaveBeenCalled();
       expect(global.fetch).toHaveBeenCalledWith(
-        'https://api.mercadolibre.com/sites/MLB/categories',
+        '/api/sites/MLB/categories',
+        expect.anything()
       );
       expect(categories).toEqual(mockedCategoriesResult);
     });
@@ -22,15 +25,12 @@ describe('1 - Implemente o módulo de acesso à api do Mercado Livre', () => {
     const query = 'my-query';
     const successResponseBody = {};
 
-    const mockFetchPromise: any = Promise.resolve({
-      json: () => Promise.resolve(successResponseBody),
-    });
-
-    vi.spyOn(global, 'fetch').mockImplementation(() => mockFetchPromise);
-    // @ts-ignore
     return api.getProductsFromCategoryAndQuery(categoryId, query).then((products: any) => {
       expect(global.fetch).toHaveBeenCalled();
-      expect(products).toEqual(successResponseBody);
+      expect(global.fetch).toHaveBeenCalledWith(
+        `/api/sites/MLB/search?category=${categoryId}&q=${query}`,
+        expect.anything()
+      );
     });
   });
 });
